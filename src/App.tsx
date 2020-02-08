@@ -1,20 +1,12 @@
-import React from 'react';
-import { Provider } from "react-redux";
+import React, { FC, Fragment } from 'react';
 
-import { store } from "./store/store";
-
-import Add from "./components/Add";
 import View from "./components/View";
 
-const App = () => {
+const App: FC = () => {
 	return (
-		<Provider
-			store={ store }
-		>
-			<Add />
+		<Fragment>
 			<View />
-		</Provider>
+		</Fragment>
 	);
 }
-
 export default App;
