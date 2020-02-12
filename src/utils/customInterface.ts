@@ -22,3 +22,7 @@ export interface IGame {
 export interface IButllet extends IGame {
     direction: string;
 }
+
+export interface SharedState extends Screen {
+    context: CanvasRenderingContext2D;
+};

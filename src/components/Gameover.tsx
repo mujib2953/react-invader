@@ -2,6 +2,7 @@ import React, { FC, Fragment, useState } from "react";
 
 const Gameover: FC = () => {
 
+    // TODO : score need to remove from state and read it from props;
     const [score, setScore] = useState(0);
 
     return (

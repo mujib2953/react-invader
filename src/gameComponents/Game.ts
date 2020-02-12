@@ -1,4 +1,4 @@
-import { IGame, Quadrilateral } from "../utils/customInterface";
+import { IGame, Quadrilateral, SharedState } from "../utils/customInterface";
 
 class Game {
 
@@ -6,7 +6,7 @@ class Game {
     private onDie?: () => void;
     public speed: number;
     private radius: number;
-    private delete?: boolean;
+    public delete?: boolean;
 
     constructor(data: IGame) {
         this.position = data.position;
@@ -16,24 +16,24 @@ class Game {
         this.delete = data.delete;
     }
 
-    private die(): void {
+    public die(): void {
         this.delete = true;
         if (this.onDie !== undefined) {
             this.onDie();
         }
     }
 
-    private render(width: number, height: number): void {
-        if (this.position.x > width) {
+    public render(state: SharedState): void {
+        if (this.position.x > state.width) {
             this.position.x = 0;
         } else if (this.position.x < 0) {
-            this.position.x = width;
+            this.position.x = state.width;
         }
 
-        if (this.position.y > height) {
+        if (this.position.y > state.height) {
             this.position.y = 0;
         } else if (this.position.y < 0) {
-            this.position.y = height;
+            this.position.y = state.height;
         }
     }
 };

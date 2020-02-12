@@ -1,5 +1,5 @@
 import Game from "./Game";
-import { IButllet } from "../utils/customInterface";
+import { IButllet, SharedState } from "../utils/customInterface";
 
 class Bullet extends Game {
 
@@ -15,7 +15,7 @@ class Bullet extends Game {
         this.direction = data.direction;
     }
 
-    private update(): void {
+    public update(): void {
         if (this.direction === "up") {
             this.position.y -= this.speed;
         } else {
@@ -23,7 +23,24 @@ class Bullet extends Game {
         }
     }
 
-    // private render(screen: Screen): void {
+    public render(state: SharedState): void {
         
-    // }
+        const { height, context } = state;
+        
+        if (this.position.y > height || this.position.y < 0) {
+            this.die();
+        }
+
+        context.save();
+        context.translate(this.position.x, this.position.y);
+        context.fillStyle = "#FF0";
+        context.lineWidth = 0,5;
+        context.beginPath();
+        context.arc(0, 0, 2, 0, 2 * Math.PI);
+        context.closePath();
+        context.fill();
+        context.restore();
+    }
 }
+
+export default Bullet;
